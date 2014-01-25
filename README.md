@@ -2,11 +2,11 @@ jsCookie
 ========
   
 **To donate and or get personal support, you are welcome to buy jsCookie from [CodeCanyon](http://codecanyon.net/item/jscookie-easy-to-use-javascript-cookie-library/308627)**  
-- Which was the previous place where jsCookie was published.
+Which was the previous place where jsCookie was published.
 
 jsCookie is a simple, fast JavaScript Library that will help you handle cookies the easy way!
 
-jsCookie is designed to change the way you handle JavaScript Cookies.
+jsCookie is designed to change the way you handle JavaScript Cookies.  
 Are you tired of the “document.cookie” element? Do you want to have full control over cookies? in a simple manner? - **get jsCookie!** 
 
 ###Video:
