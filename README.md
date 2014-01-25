@@ -14,8 +14,8 @@ Are you tired of the “document.cookie” element? Do you want to have full con
 
 ###Example:
 
-`jsCookie.create("name","value",[0,1,0,0]); //create a cookie that expires in 1 hour
-console.log(jsCookie.read("name"));//outputs: "value" `
+`jsCookie.create("name","value",[0,1,0,0]); //create a cookie that expires in 1 hour`  
+`console.log(jsCookie.read("name"));//outputs: "value" `
 
 
 ###Updates:
@@ -38,7 +38,7 @@ console.log(jsCookie.read("name"));//outputs: "value" `
  * Updated documentation.
  * Developer tool that checks jsCookie’s functions.
 * Fix for the prototype object. :) - Done!
-* 
+
 ###Implementation:
 
 1. Include jsCookie into your html file:
@@ -53,23 +53,23 @@ In the script tag where you want to use jsCookie, add the following lines: (befo
 
 ###Functions:
 
-`.enabled()` – check the availability of cookies on the client’s browser.
-`.create()` – creates or updates a cookie.
-`.set()` – creates a session cookie which exists only while the browser window remains open.
-`.read()` – returns the value of the specified cookie.
-`.readByValue()` – returns the name of the cookie’s value that was specified.
-`.remove()` – deletes a cookie by it’s name.
-`.removeByValue()` – deletes a cookie by its value.
-`.removeAll()` – deletes all the cookies (only those in the current path).
-`.count()` – returns the number of cookies on the page.
-`.getNames()` – returns all the cookies’ names in the current page.
-`.getValues()` – returns all the cookie values in the current page.
-`.update()` – update cookies while maintaining their old settings.
-`.appendValue()` -append values to already existing cookies.
-`.getSettings()` – read and updatable cookie’s settings (expire date, path, domain, secure).
-Update 1.4:
-`.getAsArray()` – returns cookies and their data as an array or object literal.
-`.getNamesByValue()` – get cookies names by their common value
+`.enabled()` – check the availability of cookies on the client’s browser.  
+`.create()` – creates or updates a cookie.  
+`.set()` – creates a session cookie which exists only while the browser window remains open.  
+`.read()` – returns the value of the specified cookie.  
+`.readByValue()` – returns the name of the cookie’s value that was specified.  
+`.remove()` – deletes a cookie by it’s name.  
+`.removeByValue()` – deletes a cookie by its value.  
+`.removeAll()` – deletes all the cookies (only those in the current path).  
+`.count()` – returns the number of cookies on the page.  
+`.getNames()` – returns all the cookies’ names in the current page.  
+`.getValues()` – returns all the cookie values in the current page.  
+`.update()` – update cookies while maintaining their old settings.  
+`.appendValue()` -append values to already existing cookies.  
+`.getSettings()` – read and updatable cookie’s settings (expire date, path, domain, secure).  
+Update 1.4:  
+`.getAsArray()` – returns cookies and their data as an array or object literal.  
+`.getNamesByValue()` – get cookies names by their common value  
 
 ###Todo:
 You are more than welcome to suggest\fork or help in any way.  
