@@ -1,0 +1,123 @@
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<script src="../jsCookie-1.3.min.js"></script>
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	</head>
+	<body>
+		<h1> Results will be shown here:</h1>
+		<div id="log"></div>
+		<script>
+			$(document).ready(function() {
+				var jsc = new jsCookie();
+				var log = $('#log');
+				log.append("<b>This file was made for testing jsCookie's functions</b><br />");
+				log.append("If all of the results shown here are green,<br /> then it's probbably your code mistake<br /> (if you have one in your own code)...<br /><br />");
+				jsc.removeAll();
+				/*--------------------------*/
+				if (jsc.enabled() == true) {
+					log.append('<font color="green">Function - enabled() - (: </font><br />');
+				} else {
+					log.append('<font color="red">Function - enabled() - :( </font><br />');
+				}
+				jsc.create("test", "someValue", [0, 1, 0, 0]);
+				jsc.set("test2", "someValue2");
+				if (jsc.read("test") == "someValue") {
+					log.append('<font color="green">Function - read() & create()  - (: </font><br />');
+				} else {
+					log.append('<font color="red">Function - read() & create() - :( </font><br />');
+				}
+				if (jsc.read("test2") == "someValue2") {
+					log.append('<font color="green">Function - read() & set() - (: </font><br />');
+				} else {
+					log.append('<font color="red">Function - read() & set() - :( </font><br />');
+				}
+				if (jsc.readByValue("someValue") == "test") {
+					log.append('<font color="green">Function - readByValue() & create() - (: </font><br />');
+				} else {
+					log.append('<font color="red">Function - readByValue() & create() - :( </font><br />');
+				}
+				if (jsc.read("test") === "someValue") {
+					log.append('<font color="green">Function - remove() & create() - (: </font><br />');
+				} else {
+					log.append('<font color="red">Function - remove() & create() - :( </font><br />');
+				}
+				jsc.removeByValue("someValue2");
+				if (jsc.read("test2") === false) {
+					log.append('<font color="green">Function - removeByValue(),read() & set() - (: </font><br />');
+				} else {
+					log.append('<font color="red">Function - removeByValue(),read() & set() - :( </font><br />');
+				}
+				jsc.set("test3", "someValue3");
+				jsc.create("test4", "someValue4", [0, 1, 0, 0]);
+				jsc.removeAll();
+				if (jsc.read("test3") === false) {
+					log.append('<font color="green">Function - removeAll(),read() & set() - (: </font><br />');
+				} else {
+					log.append('<font color="red">Function - removeAll(),read() & set() - :( </font><br />');
+				}
+				if (jsc.read("test4") === false) {
+					log.append('<font color="green">Function - removeAll(),read() & create() - (: </font><br />');
+				} else {
+					log.append('<font color="red">Function - removeAll(),read() & create() - :( </font><br />');
+				}
+				jsc.removeAll();
+				if (jsc.count() == 0) {
+					log.append('<font color="green">Function - count() - (: </font><br />');
+				} else {
+					log.append('<font color="red">Function - count() - :( - this may be a result of having cookies not in reach for the removeAll function() </font><br />');
+				}
+				var c = jsc.count();
+				arrN = jsc.getValues();
+				var c2 = 0;
+				for (var j in arrN) {
+					if ( typeof j != 'undefined') {
+						c2++;
+					}
+				}
+				if (c2 == c) {
+					log.append('<font color="green">Function - getNames() - (: </font><br />');
+				} else {
+					log.append('<font color="red">Function - getNames() - :( </font><br />');
+				}
+				jsc.create("updatable", "Old value", [0, 1, 1, 1], "/", "", false, true);
+				var sett = jsc.getSettings("updatable");
+				if (sett && sett[0] == "0,1,1,1" && sett[1] == "/" && sett[2]== "" && sett[3] == "") {
+					log.append('<font color="green">Function - getSettings() - (: </font><br />');
+				} else {
+					log.append('<font color="red">Function - getSettings() - :( </font><br />');
+				}
+				jsc.appendValue("updatable", " is old", true);
+				var sett = jsc.getSettings("updatable");
+				console.log(jsc.read("updatable"));
+				if (sett && sett[0] == "0,1,1,1" && jsc.read("updatable") == "Old value is old") {
+					log.append('<font color="green">Function - appendValue() (1/2) - (: </font><br />');
+				} else {
+					log.append('<font color="red">Function - appendValue() (1/2) - :( </font><br />');
+				}
+				jsc.appendValue("updatable", ".", false, [0,1,0,0]);
+				var sett = jsc.getSettings("updatable");
+				if (sett && sett[0] == "0,1,0,0" && jsc.read("updatable") == "Old value is old.") {
+					log.append('<font color="green">Function - appendValue() (2/2) - (: </font><br />');
+				} else {
+					log.append('<font color="red">Function - appendValue() (2/2) - :( </font><br />');
+				}
+				jsc.update("updatable","Hello World",false,true);
+				var sett = jsc.getSettings("updatable");
+				if (sett && sett[0] == "0,1,0,0" && jsc.read("updatable") == "Hello World") {
+					log.append('<font color="green">Function - update() - (: </font><br />');
+				} else {
+					log.append('<font color="red">Function - update() - :( </font><br />');
+				}
+				jsc.set("42", "wow");
+                jsc.set("2", "burp");
+                jsc.set("3.141", "wow");
+    			jsc.set("1.6*10^-19", "wow");
+                if(jsc.getNamesByValue("wow").join().indexOf("1.6*10^-19, 3.141,42")!==-1)
+                    log.append('<font color="green">Function - getNamesByValue() - (: </font><br />');
+                else
+                    log.append('<font color="red">Function - getNamesByValue() - :( </font><br />');
+			});
+		</script>
+	</body>
+</html>

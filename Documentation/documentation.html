@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Documentation - jsCookie</title>
+		<!-- CSS -->
+		<link rel="stylesheet" href="doc.css" type="text/css" />
+	</head>
+	<body>
+		<div id="main">
+			<h1> Documentation</h1>
+			<div id="right">
+				<u>Updated:</u> 04/12/2013
+			</div>
+			<hr />
+			<br />
+			<img src="img/doc-logo.png" alt="jsCookie-Logo" />
+			<br />
+			<h2> jsCookie-1.4:</h2>
+			<div id="big">
+				<p>
+					is a simple, fast JavaScript class that will help you handle cookies <i>the easy way</i>!
+					<br />
+					<br />
+					<b>jsCookie is designed to change the way you handle JavaScript Cookies.</b>
+					<br />
+					<br />
+				</p>
+			</div>
+			<hr /><br />
+			<b><u>Table of Contents:</u></b><br />
+			<ul>
+				<li><a href="#implement">Implementing jsCookie</a></li>
+				<li><a href="#functions">Functions</a></li>
+				<li><a href="#1.4">New 1.4 Functions</a></li>
+				<li><a href="#qna">Q&A</a></li>
+				<li><a href="#notes">Notes</a></li>
+			</ul>
+			<hr />
+			<div id="implement" style="display:inline;"></div>
+			<h3> 1) Add jsCookie:</h3>
+			<p>
+				You will need to copy the <i>"jsCookie-1.4.min.js"</i> file(from the zip file you downloaded)
+				into your server.
+				<br />
+				<b>(Remember where you uploaded it to, i.e. the path on the server)</b>
+			</p>
+			<h3> 2) Include jsCookie into your html file:</h3>
+			<div id="warning">
+				Use the jsCookie-1.4.min.js version, it is lighter!
+			</div>
+			<p>
+				Just copy this code into your html file and paste it <b>before</b> the <u>&lt;/head></u>
+				tag or the <u>&lt;/body></u> tag.
+				<br />
+				Like so:
+				<br />
+				<textarea class="code" rows="1" cols="60" spellcheck="false">&lt;script src="your/path/jsCookie-1.4.min.js">&lt;/script></textarea>
+			</p>
+			<h3> 3) Call jsCookie</h3>
+			<p>
+				In the script tag where you want to use jsCookie, add the following lines:
+				<br />
+				(before using the jsCookie functions, otherwise it will not have time to load)
+				<br />
+			</p>
+			<textarea class="code" rows="1" cols="60" spellcheck="false">var jsc = new jsCookie();</textarea>
+			<br />
+			<h3> 4) Start coding!</h3>
+			<p>
+				Now you can start using jsCookie in your project!
+				<br />
+				Scroll down to see all the jsCookie functions you can use...
+			</p>
+			<div class="suggest">
+				<p>
+					I know that jsCookie is good for anything regarding cookies.
+					<br />
+					Yet,
+					<br />
+					I highly recommend on using a browser extension when working with cookies.
+					<br />
+					It will accelerate your development time.
+					<br />
+					I suggest the following addons for chrome & firefox:
+					<br />
+					-Chrome:<a href="https://chrome.google.com/webstore/detail/fngmhnnpilhplaeedifhccceomclgfbg?hl=he" target="_blank">Edit This Cookie</a>
+					<br />
+					-FireFox(& ie):<a href="http://jayapal.8k.com/firefox/" target="_blank">Cookie Manager</a>
+				</p>
+			</div>
+			<hr />
+			<div id="functions" style="display:inline;"></div>
+			<h2> Functions:</h2>
+			<br />
+			<div id="warning">
+				I suggest working and testing cookies online (on a web server).
+			</div>
+			<h3> .enabled()</h3>
+			<p>
+				The enabled function is used for checking the availability of cookies on the client's
+				browser.
+				<br />
+				The function returns true if cookies are enabled, and false when cookies are
+				not enabled.
+				<br />
+				* This function can run offline.
+				<br />
+				<div class="param">
+					* <u>No @param</u>
+					<br />
+					* <u>OnSuccess:</u> true, <u>OnFailure:</u> false
+				</div>
+				<br />
+				<br />
+				<u>Example:</u>
+			</p>
+			<textarea class="code" rows="6" cols="60" spellcheck="false">
+if(jsc.enabled()){
+	alert("Cookies are enabled!");
+}else{
+	alert("Cookies are not enabled!");
+}</textarea>
+			<br />
+			<h3> .create()</h3>
+			<p>
+				The create function creates a cookie.
+				<br />
+				In case of failure the function will return false.
+				<br />
+				<div class="param">
+					* <u>@param {string} name </u>- name of cookie to create, ***Required***
+					<br />
+					* <u>@param {string/int} value </u>- name of cookie, ***Required***
+					<br />
+					* <u>@param {array/int}[Days, Hours, Minutes, Seconds] expire </u>- time for cookie to expire
+					<br />
+					* <u>@param {string} path </u>- location of cookie on the server to be active
+					<br />
+					* <u>@param {string} domain </u>- domain connected to cookie
+					<br />
+					* <u>@param {string/bool} secure </u>- send the cookie over SSL connections only
+					<br />
+					*
+					<div class="new" style="display:inline;">
+						<u id="create_updt_flag" >@param {string/bool} updatable </u>- updatable flag (see <a href="#updatable">.update()</a> method) 
+					</div>
+					<br />
+					* <u>OnSuccess:</u> none, <u>OnFailure:</u> false
+				</div>
+				<br />
+				<u>Example:</u>
+				<br />
+				This example creates a cookie in the current directory which it was called from. It expires after 1 hour.
+				<br />
+				<textarea class="code" rows="1" cols="60" spellcheck="false">
+jsc.create("test","someValue",[0,1,0,0]);</textarea>
+				<br />
+				This example will create an updatable(<a href="#updatable">.update</a>) cookie:<br />
+				<textarea class="code" rows="1" cols="75" spellcheck="false">
+jsc.create("updatable", "Old value", [0, 1, 1, 1], "/", "", false, true);</textarea><br />
+				<u>Creating a cookie with a path can be ignored,
+					<br/>
+					if the path of the cookie is created on - is not included in the path parameter.</u>
+			</p>
+
+			<br />
+			<h3> .set()</h3>
+			<p>
+				This quickly creates a session cookie which exists only while the browser window remains open.
+				<br />
+				(No other options, only name and value)
+				<br />
+				In case of failure the function will return false.
+				<br />
+				<div class="param">
+					* <u>@param {string} name </u>- name of cookie to read, ***Required***
+					<br />
+					* <u>@param {string} value </u>- value of cookie on the server, ***Required***
+					<br />
+					* <u>OnSuccess:</u> none, <u>OnFailure:</u> none
+					<br />
+				</div>
+				<br />
+				<u>Example:</u>
+				<br />
+				<textarea class="code" rows="1" cols="60" spellcheck="false">
+jsc.set("test2","someValue2");</textarea>
+			</p>
+			<br />
+			<h3> .read()</h3>
+			<p>
+				The read function returns the value of the specified cookie.
+				<br />
+				It will return false if no cookie was found.
+				<br />
+				<div class="param">
+					<u>@param {string} name </u>- name of cookie to read, ***Required***
+					<br />
+					* <u>OnSuccess:</u> {string}value of cookie, <u>OnFailure:</u> false
+				</div>
+				<br />
+				<u>Example:</u>
+				<br />
+				<textarea class="code" rows="1" cols="60" spellcheck="false">
+alert(jsc.read("test"));</textarea>
+			</p>
+			<br />
+			<h3> .readByValue()</h3>
+			<p>
+				The readByValue function returns the name of the cookie's value that was specified.
+				<br />
+				It will return false if no cookie was found.
+				<br />
+				<div class="param">
+					<u>@param {string} value </u>- value of cookie to read, ***Required***
+					<br />
+					* <u>OnSuccess:</u> {string}name of cookie, <u>OnFailure:</u> false
+				</div>
+				<br />
+				<u>Example:</u>
+				<br />
+				<textarea class="code" rows="1" cols="60" spellcheck="false">
+alert(jsc.readByValue("someValue"));</textarea>
+			</p>
+			<br />
+			<h3> .remove()</h3>
+			<p>
+				The remove function deletes a cookie by its name.
+				<br />
+				<div class="param">
+					* <u>@param {string} name </u>- name of cookie to read, ***Required***
+					<br />
+					* <u>@param {string} path </u>- location of cookie on the server
+					<br />
+					* <u>@param {string} domain </u>- location of cookie on the server
+					<br />
+					* <u>OnSuccess:</u> none, <u>OnFailure:</u> false
+					<br />
+				</div>
+				<br />
+				<u>Example:</u>
+				<br />
+				<textarea class="code" rows="1" cols="60" spellcheck="false">
+jsc.remove("test");</textarea>
+			</p>
+			<br />
+			<h3> .removeByValue()</h3>
+			<p>
+				The removeByValue function deletes a cookie by its value.
+				<br />
+				<div class="param">
+					* <u>@param {string} value </u>- name of cookie to read, ***Required***
+					<br />
+					* <u>@param {string} path </u>- location of cookie on the server
+					<br />
+					* <u>@param {string} domain </u>- location of cookie on the server
+					<br />
+					* <u>OnSuccess:</u> none, <u>OnFailure:</u> false
+					<br />
+				</div>
+				<br />
+				<u>Example:</u>
+				<br />
+				<textarea class="code" rows="1" cols="60" spellcheck="false">
+jsc.removeByValue("someValue");</textarea>
+			</p>
+			<br />
+			<h3> .removeAll()</h3>
+			<p>
+				The removeAll function deletes all the cookies (only those in the current path).
+				<br />
+				<div class="param">
+					* <u>No @param</u>
+					<br />
+					* <u>OnSuccess:</u> returns array, <u>OnFailure/No records:</u> false
+				</div>
+				<br />
+				<u>Example:</u>
+				<br />
+				<textarea class="code" rows="1" cols="60" spellcheck="false">
+jsc.removeAll();</textarea>
+			</p>
+			<br />
+			<h3> .count()</h3>
+			<p>
+				Returns the number of cookies on the page.
+				<br />
+				<div class="param">
+					* <u>No @param</u>
+					<br />
+					* <u>OnSuccess:</u> returns int (number of cookies), <u>OnFailure/No records:</u> none
+				</div>
+				<br />
+				<u>Example:</u>
+				<br />
+				<textarea class="code" rows="1" cols="60" spellcheck="false">
+alert(jsc.count());</textarea>
+			</p>
+			<h3> .getNames()</h3>
+			<p>
+				The getNames function returns all the cookies' names in the current page.
+				<br />
+				<div class="param">
+					* <u>No @param</u>
+					<br />
+					* <u>OnSuccess:</u> returns array, <u>OnFailure/No records:</u> false
+				</div>
+				<br />
+				<u>Example:</u>
+				<br />
+				<textarea class="code" rows="1" cols="60" spellcheck="false">
+alert(jsc.getNames());</textarea>
+			</p>
+			<br />
+			<h3> .getValues()</h3>
+			<p>
+				The getValues function returns all the cookie values in the current page.
+				<br />
+				<div class="param">
+					* <u>No @param</u>
+					<br />
+					* <u>OnSuccess:</u> returns array, <u>OnFailure/No records:</u> false
+				</div>
+				<br />
+				<u>Example:</u>
+				<br />
+				<textarea class="code" rows="1" cols="60" spellcheck="false">
+alert(jsc.getValues());</textarea>
+			</p>
+			<br />
+			<div class="new">
+				<h3 id="1.4"> .getAsArray()</h3>
+			</div>
+			<p>
+				The getAsArray function returns cookies and their data as an array (string) or as an array(object literal).
+
+				<br />
+				(in the current page).
+				<br />
+				<div class="param">
+					* <u>@param {bool} returnObject </u>- will return the new object literal array instead of splitted array
+					<br />
+					* <u>OnSuccess:</u> returns array, <u>OnFailure:</u> false
+					<br />
+				</div>
+				<u>Example:</u>
+				<br />
+				<textarea class="code" rows="5" cols="60" spellcheck="false">
+arr = jsc.getAsArray();
+for(var i in arr){
+	alert(arr[i]);
+}</textarea>
+			</p>
+							<b>Or: (object literal) -</b>
+				<br />
+				<textarea class="code" rows="4" cols="55" spellcheck="false">
+arr = jsc.getAsArray(true);
+for(var i in arr){
+	alert(arr[i].name + "=" + arr[i].value);
+}	
+</textarea>
+
+			</p>
+			<br />
+			<br />
+			<div>
+				<h3 id="updatable"> .update()</h3>
+			</div>
+			<p>
+				Update a cookie while keeping its initial values (expire, path, domain, secure).
+				<br />
+				Date parameter can be changed.
+				<br />
+				Update method will only work with cookies that have the <a href="#create_updt_flag">"updatable" flag</a> (as true).
+				<br />
+				Cookie name is presistant.
+				<br />
+				<br />
+				<div class="param">
+					* <u>@param {string} name</u> - name of cookie to read, ***Required***
+					<br />
+					* <u>@param {string} newValue</u> - new value for the cookie, ***Required***
+					<br />
+					* <u>@param {string} newDate</u> - update cookie with a new date of expiration, ***Required***
+					<br />
+					<b>OR</b>:
+					<br />
+					* <u>@param {string} keepDate</u> - keep the current expiration date, ***Required***
+					<br />
+					* <u>OnSuccess:</u> none, <u>OnFailure:</u> false
+					<br />
+				</div>
+				<br />
+				<u>Example:</u>
+				<br />
+				<textarea class="code" rows="3" cols="75" spellcheck="false">
+jsc.create("test","Test Value",[1,0,0,0],"/","domain",false,true);
+jsc.update("test","New Test Value",false,true);</textarea>
+<br />				<b>Or:</b>
+				<br />
+				<textarea class="code" rows="3" cols="75" spellcheck="false">
+jsc.create("test","Test Value",[1,0,0,0],"/","domain",false,true);
+jsc.update("test","This cookie will expire sooner!",[0,0,1,0],true);</textarea>
+
+			</p>
+			<br />
+			<div>
+				<h3> .appendValue()</h3>
+			</div>
+			<p>
+				Appends a value to already existing cookie.
+				<br />
+				<div class="param">
+					* <u>@param {string} name</u> - name of cookie to read, ***Required***
+					<br />
+					* <u>@param {string} addValue</u> - appended value, ***Required***
+					<br />
+					* <u>@param {string} updatable</u> - keep cookie settings (updatable cookie) ***Required***
+					<br />
+					<b>Or:</b>
+					<br />
+					* <u>@param {array/int} expire</u> - optional - set expire date, if the cookie isn't updatable ***Required***
+					<br />
+					* <u>OnSuccess:</u> none, <u>OnFailure:</u> false
+				</div>
+				<br />
+				<u>Example:</u>
+				<br />
+				<textarea class="code" rows="3" cols="78" spellcheck="false">
+jsc.create("test","What is the answer?",[1,0,0,0],"/","domain",false,true);
+jsc.appendValue("test"," 42 is the answer",true);</textarea>
+			</p>
+			<br />
+			<div>
+				<h3> .getSettings()</h3>
+			</div>
+			<p>
+				Get an updatable cookie's settings.
+				<br />
+				<div class="param">
+					* <u>@param {string} name</u> - name of cookie to read, ***Required***
+					<br />
+					* <u>Return values:</u> array of strings - [0 = expire, 1 = path, 2 = domain, 3 = secure]
+					<br />
+					* <u>OnSuccess:</u> {string/arr}, <u>OnFailure:</u> false
+				</div>
+				<br />
+				<u>Example:</u>
+				<br />
+				<textarea class="code" rows="6" cols="78" spellcheck="false">
+jsc.create("test","Test Value",[1,0,0,0],"/","domain",false,true);
+alert("This cookie will expire in: "+jsc.getSettings("test")[0]);
+alert("Cookie path: "+jsc.getSettings("test")[1]);
+alert("Cookie domain: "+jsc.getSettings("test")[2]);
+alert("Is this cookie a secure cookie?: "+jsc.getSettings("test")[3]);</textarea>
+			</p>
+			<br />
+			<div class="new">
+				<h3> .getNamesByValue()</h3>
+			</div>
+			<p>
+				Get names array of cookies by their common value
+				<br />
+				<div class="param">
+					* <u>@param {string} value</u> - value of cookies to return, ***Required***
+					<br />
+					* <u>Return values:</u> array of strings (names)
+					<br />
+					* <u>OnSuccess:</u> {string/arr}, <u>OnFailure:</u> false
+				</div>
+				<br />
+				<u>Example:</u>
+				<br />
+				<textarea class="code" rows="6" cols="78" spellcheck="false">
+jsc.set("42", "wow");
+jsc.set("2", "burp");
+jsc.set("3.141", "wow");
+jsc.set("1.6*10^-19", "wow");
+var arr = jsc.getNamesByValue("wow");
+console.log(arr);</textarea>
+			</p>
+			<br />
+			<hr />
+			<div id="qna" style="display:inline;"></div>
+			<h3> Questions:</h3>
+			1) How do I update / change a value  or expire time of a cookie?
+			<br />
+			<b>Answer (1):</b>
+			<br />
+			<p>
+				<s>Just insert the name of a cookie that was already created,</s>
+				<br />
+				<s>and jsCookie will update that cookie with what you entered.</s><br />
+				<b>(Version 1.3) - </b> Use the update() function:
+			</p>
+			Initial cookie creation:
+			<br />
+			(Remember the last bool parameter - the updatable flag)
+			<br />
+			<textarea class="code" rows="1" cols="60" spellcheck="false">jsc.create("test", "initial value", [0,1,30,0], "path", "domain", false, true);</textarea>
+			<br />
+			Update function:
+			<br />
+			<textarea class="code" rows="1" cols="60" spellcheck="false">jsc.update("test", "Changed!", false, true);</textarea>
+			<br />
+			<br />
+			2) What can I do with the ".getAsArray()" function?
+			<br />
+			<b>Answer (2):</b>
+			<br />
+			<p>
+				It's simple.
+				<br />
+				If you want to manipulate the cookie objects in an array manner,
+				<br />
+				this is the tool for you.
+				<br />
+				If you want, for example, to do something with all the cookies and you need them separated,
+				use this function.(change all the cookies value's)
+			</p>
+			<br />
+			<br />
+			3) I want to hash my cookie so it will be protected, how can I do so?
+			<br />
+			<b>Answer (3):</b>
+			<br />
+			<p>
+				As you know jsCookie runs within, JavaScript,
+				<br />
+				JavaScript is a client-side programming language.
+				<br />
+				This means that all the code that you write is easily viewed in the client's browser.
+				<br />
+				Thus, if I would have written a hash algorithm to secure your cookies they would
+				actually not be that secure,
+				<br />
+				for the obvious reason that users could read and understand my code and probably
+				break it and "hack" your cookies.
+				<br />
+				To work something out I would recommend using a server-side solution by
+				<br />
+				creating your cookies in a server-side programming language.
+				<br />
+				In this way you could create and hash your cookies in a more secure way.
+			</p>
+			<br />
+			<br />
+			4) I want to add my own function to jsCookie, how can I do so?
+			<br />
+			<b>Answer (4):</b>
+			<br />
+			<p>
+				You can do so by writing something like this into jsCookie-1.4.js:<br />
+				I would also recommend using an online solution for minifying the code.
+			</p>
+			<br />
+			<textarea class="code" rows="10" cols="60" spellcheck="false">
+/*
+*Basic info here
+* @param {type} name_of_parameter - info about it, ***Required***
+* @param {type} name_of_parameter - info about it,
+*/	
+jsCookie.prototype.YOUR_FUNCTION_NAME = function(parameters){
+	the code here
+};
+			</textarea>
+			<br />
+			<b>(DO NOT RESELL EVEN IF THE CODE WAS CHANGED) - Unless you bought the <a href="http://codecanyon.net/licenses/regular_extended#extended">Extended Licence</a></b>
+			<br />
+			<br />
+			5) If I don't specify the expire time in the .create() function, when will it expire?
+			<br />
+			<b>Answer (5):</b>
+			<p>
+				The cookie will expire just like the cookie created with the set function (session cookie),
+				<br />
+				they will expire when the client exits the browser.
+				<br />
+			</p>
+			<br />
+			<br />
+			6) I have a suggestion/bug report I want to inform you about,
+			<br />
+			where can I contact you?
+			<br />
+			<b>Answer (6):</b>
+			<p>
+				It's super easy to contact me,
+				<br />
+				send me an email to:<a href="mailto:agam360@gmail.com">agam.more at  gmail.com</a>
+				<br/>
+				Or click on the blue sign on the left corner of
+				<br />
+				the page, it will take you to my codecanyon page.
+				<br />
+			</p>
+			<br />
+			7) I have x cookies on a page but the .count() function
+			<br />
+			retuns y cookies insted, why?
+			<br />
+			<b>Answer (7):</b>
+			<p>
+				This happens because those cookies that were not counted (or read etc...), they were possibly created by the server-side(php,asp.net...),
+				Or have a different path/domain (than the code execution one's).
+				<br />
+				Therefore jsCookie cannot read them.
+				<br />
+			</p>
+			<br />
+			8) When I use the .remove or .removeAll function, it does not delete all of my cookies, why?
+			<br />
+			<b>Answer (8):</b>
+			<p>
+				This happens because those cookies that were not deleted were created with the spesification of a domain or path.
+				<br />
+				Therefore the remove function cannot remove them.
+				<br />
+				A quick solution for that is:
+				<br />
+				<textarea class="code" rows="2" cols="70" spellcheck="false">
+jsc.remove("CookieNameToDelete","PATH","DOMAIN");
+			</textarea>
+				<br />
+				Replace the capital words to the cookie's properies.
+			</p>
+			<br />
+			9) Problems or lack of understanding of .create() function properties:
+			<br />
+			<b>Answer (9):</b>
+			<p>
+				I will explain how to use them correctly:
+				<br />
+				<br />
+				To activate the cookie only at a particular path:
+				<br />
+				<textarea class="code" rows="2" cols="70" spellcheck="false">
+jsc.create('test','path',[0,1,0,0],'/currentPath/cookieShouldBeActivatedOnlyHere/');
+			</textarea>
+				<br />
+				Cookie will work in a particular domain:
+				<br />
+				<textarea class="code" rows="2" cols="70" spellcheck="false">
+jsc.create('test','domain',[0,1,0,0],'/','your.domain.com');
+			</textarea>
+				<br />
+				Cookie will be activated over SSL connections only:
+				<br />
+				<textarea class="code" rows="2" cols="70" spellcheck="false">
+jsc.create('test','secure',[0,1,0,0],'/','',true);
+			</textarea>
+				<br />
+			</p>
+			10) How do I check if a cookie exists?
+			<br />
+			For Example, show a popup only for the first time:
+			<br />
+			<br />
+
+			<b>Answer (10):</b>
+			<p>
+				One client has already asked this question.
+				<br />
+				So I decided to attach the file to jsCookie-1.4.js
+				<br />
+				Take a look in:
+				jsCookie-folder/Dev/popupExample.html
+				<br />
+			</p>
+			<br />
+			<hr />
+			<div id="notes" style="display:inline;"></div>
+			<h3> Notes:</h3>
+			<br />
+			1) In the create function do not enter the semi colon("<b>;</b>") symbol,
+			<br />
+			the function will return false if inserted.
+			<br />
+			2) You can only manipulate cookies created by JavaScript - if a cookie was created by the server-side,
+			<br />
+			then you couldn't manipulate it through JavaScript (an http cookie).
+			<br />
+			3) For for detail about cookies please visit this web page:
+			<br />
+			<a href="http://www.cookiecentral.com/faq/" target="_blank">The unofficial cookie FAQ</a>(by David Whalen)
+			<br />
+			4)jsCookie code will not run offline <b>IN GOOGLE CHROME</b>, because cookies need a server to be created.
+			<br />
+			5) If you are using the updatable flag, don't or use the following as a value/name: "_jscUpt_".
+			<br />
+
+		</div>
+		<div id="fot">
+			<a href="http://codecanyon.net/user/Agam360" target="_blank"><img src="img/footer.png" /></a>
+		</div>
+	</body>
+</html>
